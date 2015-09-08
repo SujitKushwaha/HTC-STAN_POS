@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html ng-app="starter">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title>Todo</title>
+	
+		<link href="css/transactionScreen.css" rel="stylesheet">
+		<link href="css/keyboardScreen.css" rel="stylesheet1">
+		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<script src="js/angular.js"></script>
+		<script src="js/angular-route.js"></script>
+		<script src="js/angular-route.min.js"></script>
+
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    </head>
+	
+    <body ng-controller="MainController" >
+	<div id="main">
+		<div id="first">
+			<div id="first-one">
+				<div id="first-one-1">&nbsp;&nbsp;&nbsp;&nbsp;HTC-POS</div>
+				<div id="first-one-one">
+					<div id="header">
+						<div id="header-one"><span type="posHeader">Qty</span>
+						</div>
+						<div id="header-two"><span id="itemname" type="posHeader">Item Name</span>
+						</div>
+						<div id="header-three"><span type="posHeader">Cost</span>
+						</div>
+						<div id="header-four" ><span type="posHeader">{{Comment}}</span>
+						</div>
+					</div>
+					<ul>
+						<li id="myrow" ng-click="itemOptions(item.Id)" ng-repeat="item in myCart" ng-class="{'pending-delete': item.checked}">
+							<span id="itemqty">{{item.qty}}</span>
+							<span id="itemname">{{item.name}}</span>
+							<span id="itemrate">{{item.rate|currency}}</span>
+							<span id="itemcomment">{{item.comment}}</span>
+						</li>
+					</ul>
+					<br/><br/><br/><br/><br/><br/>
+					<ul>
+						<li id="myDiscountRow" ng-repeat="item in myDiscount">
+							<span id="itemqty">Discount on {{item.name}} is &nbsp;&nbsp;&nbsp; -{{item.discount|currency}}</span>
+						</li>
+					</ul>
+				</div>
+				<div id="mytotal" >
+						<span id="itemqty">&nbsp;&nbsp;&nbsp;&nbsp;Total</span>
+						<span id="itemrate" ng-hide="totalHideFlag">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{total|currency}}</span><br /><br />
+				</div>
+				<div id="first-one-two" ng-hide="fot">
+					<div id="view-one">
+						<div id="view-one-one">
+							<div id="one">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Total</div>
+							<div id="two">&nbsp;&nbsp;Paid</div>
+							<div id="three">&nbsp;&nbsp;Change</div>
+						</div>
+						<div id="view-one-two">
+							<div id="NP-one">
+							   <button type="Button" >A</button> 
+							   <button type="Button"  >V</button>
+							</div>
+							<div id="NP-two">
+							   <button type="Button" ></button>
+							   <button type="Button" ng-click="numPad()">NUMPAD</button>
+							</div>
+						</div>
+					</div>
+					<div id="input">
+						<div id="inputText">&nbsp;&nbsp;Input</div>
+						<div id="inputBox">
+							<form name="myFormNg" ng-submit="okpress()">
+								<input type="text" name="formid" ng-model="btnstring" id="tb1" autofocus required>
+								<br />
+								<input type="button"  name="Submit" value=" Apply " style="position: absolute; height: 0px; width: 0px; border: none; padding: 0px;" hidefocus="true" tabindex="-1" />
+							</form>
+						</div>
+					</div>
+				</div>
+				<div id="first-one-two" ng-hide="fot_duplicate">
+					<div id="first-box" style="color:white">
+							Enter Discount {{discountValue}}
+							<br/>
+							<br/>
+					</div>
+					<div id="two1">
+						<form name="myFormNg" ng-submit="okpress()">
+							<input type="text" name="formid" ng-model="btnstring" id="tb2" autofocus required>
+							<br />
+							<input type="button"  name="Submit" value="Apply" style="position: absolute; height: 0px; width: 0px; border: none; padding: 0px;" hidefocus="true"  tabindex="-1" />
+						</form>
+					</div>
+					<div>
+						<button type="discountOption" ng-click="calculateDiscount()">OK</button> 
+						<button type="discountOption" ng-click="cancelDiscount()" >Cancel`</button>
+					</div>
+				</div>
+				<div id="first-one-two" ng-hide="correctionFlag">
+					<div id="first-box" style="color:white">
+							Enter Corrected Price
+							<br/>
+							<br/>
+					</div>
+					<div id="two1">
+						<form name="myFormNg" ng-submit="okpress()">
+							<input type="text" name="formid" ng-model="btnstring" id="tb2" autofocus required>
+							<br />
+							<input type="button"  name="Submit" value="Apply" style="position: absolute; height: 0px; width: 0px; border: none; padding: 0px;" hidefocus="true"  tabindex="-1" />
+						</form>
+					</div>
+					<div>
+						<button type="discountOption" ng-click="calculateCorrection()">OK</button> 
+						<button type="discountOption" ng-click="cancelCorrection()" >Cancel`</button>
+					</div>
+				</div>
+			</div>
+			<div id="first-two">
+				<div id="first-two-one" ng-hide="hideThirdFlag">
+					<div id="Row2" ng-hide="hideRow2Flag">
+						<div id="Option-row1">
+							<button type="optionButton" ng-click="allCupsItems()" style="background:linear-gradient(#A3A375,#6B6B47);">All Cups</button> 
+							<button type="optionButton"  style="background:linear-gradient(#FFD79B,orange);">AM Food</button>
+							<button type="optionButton"  style="background:linear-gradient(#FF6666,red);">Item Sale</button>
+						</div>
+						<div id="Option-row2">
+							<button type="optionButton"  style="background:linear-gradient(#A3A375,#6B6B47);">Ice</button>
+							<button type="optionButton"  style="background:linear-gradient(#FFD79B,orange);">PM Food</button>
+							<button type="optionButton"  style="background:linear-gradient(#FF6666,red);">Item Void</button>
+						</div>
+						<div id="Option-row3">
+							<button type="optionButton"  style="background:linear-gradient(#A3A375,#6B6B47);">MO</button>
+							<button type="optionButton" style="background:linear-gradient(#FFD79B,orange);">Lotto Win</button>
+							<button type="optionButton"  style="background:linear-gradient(#FF6666,red);">Auth Gas</button>
+						</div>
+						<div id="Option-row4">
+							<button  type="optionButton"  style="background:linear-gradient(#A3A375,#6B6B47);">Other Dept</button>
+							<button type="optionButton" style="background:linear-gradient(#FFD79B,orange);">Lotto Sale</button>
+							<button type="optionButton" style="background:linear-gradient(#FF6666,red);">PLU Item</button>
+						</div>
+						<div id="Option-row5">
+							<button type="optionButton"  style="background:linear-gradient(#A3A375,#6B6B47);">Safe</button>
+							<button type="optionButton"  style="background:linear-gradient(#FFD79B,orange);">No Sale</button>
+							<button type="optionButton"  style="background:linear-gradient(#FF6666,red);">Void Trans</button>
+						</div>
+					</div>
+					<div id="Row2" ng-hide="hideRow2Flag1">
+						<div id="Option-row1">
+							<button type="optionButton" ng-click="back()" style="background:linear-gradient(#85ADFF,green);">Back</button>
+						</div>
+						<div id="Option-row2">
+							<button type="optionButton" ng-click="addItemToCart(1)" style="background:linear-gradient(#A3A375,#6B6B47);">Slurpee Small</button> 
+							<button type="optionButton" ng-click="addItemToCart(2)" style="background:linear-gradient(#A3A375,#6B6B47);">Slurpee Medium</button>
+							<button type="optionButton" ng-click="addItemToCart(3)" style="background:linear-gradient(#A3A375,#6B6B47);">Slurpee Large</button>
+							
+						</div>
+						<div id="Option-row3">
+							<button type="optionButton" ng-click="addItemToCart(4)" style="background:linear-gradient(#A3A375,#6B6B47);">Coffee Small</button>
+							<button type="optionButton" ng-click="addItemToCart(5)" style="background:linear-gradient(#A3A375,#6B6B47);">Coffee Medium</button>
+							<button type="optionButton" ng-click="addItemToCart(6)" style="background:linear-gradient(#A3A375,#6B6B47);">Coffee Large</button>
+						</div>
+					</div>
+				</div>
+				<div id="first-two-one" ng-hide="!hideThirdFlag">
+					<div id="Row2">
+						<div id="Option-row1">
+							<button type="optionButton" ng-click="back()" style="background:linear-gradient(#85ADFF,green);">Back</button>
+						</div>
+						<div id="Option-row2">
+							<button type="optionButton" data-toggle="modal" data-target="#keyboardScreen" style="background:linear-gradient(#85ADFF,#16BCE6);">Item Note</button>
+							<button type="optionButton" ng-click="priceCorrection()" style="background:linear-gradient(#85ADFF,#16BCE6);">Price Correction</button>
+							<button type="optionButton" ng-click="itemFree()" style="background:linear-gradient(#85ADFF,#16BCE6);">Item Free</button>
+						</div>
+						<div id="Option-row3">
+							<button type="optionButton" ng-click="discount('%')" style="background:linear-gradient(#85ADFF,#16BCE6);">Discount (%)</button>
+							<button type="optionButton" ng-click="discount('$')" style="background:linear-gradient(#85ADFF,#16BCE6);">Discount ($)</button>
+							<button type="optionButton" ng-click="itemVoid()" style="background:linear-gradient(#85ADFF,#16BCE6);">Item Void</button>
+						</div>
+						<div id="Option-row4">
+							<button type="optionButton" ng-click="cancelOption()" style="background:linear-gradient(#FF6666,red);">Cancel</button>
+						</div>
+						<div id="Option-row5">
+						</div>
+					</div>
+				</div>
+				<div id="first-two-two" ng-hide="numPadHideFlag">
+					<div id="numberPad">
+						<div id="numPad">
+							<div id="NP-One-row1">
+							   <button type="numpadButton" ng-click="btnpress(7)">7</button> 
+							   <button type="numpadButton"  ng-click="btnpress(8)">8</button>
+							   <button type="numpadButton" ng-click="btnpress(9)" >9</button>
+							</div>
+							<div id="NP-One-row2">
+							   <button type="numpadButton" ng-click="btnpress(4)">4</button>
+							   <button type="numpadButton" ng-click="btnpress(5)" >5</button>
+							   <button type="numpadButton" ng-click="btnpress(6)" >6</button>
+							</div>
+							<div id="NP-One-row3">
+							   <button type="numpadButton"  ng-click="btnpress(1)">1</button>
+							   <button type="numpadButton"  ng-click="btnpress(2)">2</button>
+							   <button type="numpadButton"  ng-click="btnpress(3)">3</button>
+							</div>
+							<div id="NP-One-row4">
+								<button type="numpadButton" ng-click="btnpress(0)">0</button>
+							    <button type="doubleZeroButton" ng-click="doubleZero()">00</button>
+							</div>
+						</div>
+						<div id="numPadOptions">
+							<button type="numpadButton1" ng-click="cncpress()">C</button>
+							<button type="numpadButton1" ng-click="btnpress('*')">*</button>
+							<button type="enterButton" ng-click="enterbtnpress()">Enter</button>
+						</div>
+					</div>
+					<div id="cross">
+						<button type="crossButton" ng-click="cancelNumPad()">X</button>
+						<button type="crossButton" ng-hide="dotFlag" ng-click="btnpress('.')">.</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="second">
+		</div>
+	
+	
+	<div class="modal fade modal-fullscreen" id="keyboardScreen" role="dialog">
+		<div class="modal-dialog" id="keyboardScreenDialog">
+    
+			<div class="modal-content">
+				<div class="modal-body" id="body">
+				
+					<div id="first11">
+						<div id="first-one11" style="color:white">
+							Enter Comment on Item
+						</div>
+						<div id="first-two11">
+							<form name="myFormNg" ng-submit="okpress()">
+							<input type="text" name="formid" ng-model="commentstring" id="tb111" autofocus required>
+							<br />
+							<input type="button"  name="Submit" value=" Apply " style="position: absolute; height: 0px; width: 0px; border: none; padding: 0px;" hidefocus="true" tabindex="-1" />
+							</form>
+						</div>
+					</div>
+					<div id="second11">
+						<div id="second-one11">
+							<div style="height:20% ;width:100%"></div>
+								<button type="Button" ng-click="capitalLetters()">A</button> 
+								<button type="Button" ng-click="smallLetters()">a</button> 
+								<button type="Button" >a`</button> 
+							<div style="height:20% ;width:100%"></div>
+						</div>
+						<div id="second-two11" ng-hide="capitalLettersFlag">
+							<div id="one">
+								<button type="numpadButton11" ng-click="commentpress(1)">1</button>
+								<button type="numpadButton11" ng-click="commentpress(2)">2</button>
+								<button type="numpadButton11" ng-click="commentpress(3)">3</button> 
+								<button type="numpadButton11" ng-click="commentpress(4)">4</button>
+								<button type="numpadButton11" ng-click="commentpress(5)">5</button>
+								<button type="numpadButton11" ng-click="commentpress(6)">6</button> 
+								<button type="numpadButton11" ng-click="commentpress(7)">7</button>
+								<button type="numpadButton11" ng-click="commentpress(8)">8</button>
+								<button type="numpadButton11" ng-click="commentpress(9)">9</button>
+								<button type="numpadButton11" ng-click="commentpress(0)">0</button>
+							</div>
+							<div id="two">
+								<button type="numpadButton11" ng-click="commentpress('Q')">Q</button>
+								<button type="numpadButton11" ng-click="commentpress('W')">W</button>
+								<button type="numpadButton11" ng-click="commentpress('E')">E</button> 
+								<button type="numpadButton11" ng-click="commentpress('R')">R</button>
+								<button type="numpadButton11" ng-click="commentpress('T')">T</button>
+								<button type="numpadButton11" ng-click="commentpress('Y')">Y</button> 
+								<button type="numpadButton11" ng-click="commentpress('U')">U</button>
+								<button type="numpadButton11" ng-click="commentpress('I')">I</button>
+								<button type="numpadButton11" ng-click="commentpress('O')">O</button>
+								<button type="numpadButton11" ng-click="commentpress('P')">P</button>
+							</div>
+							<div id="three">
+								<button type="numpadButton11" ng-click="commentpress('A')">A</button>
+								<button type="numpadButton11" ng-click="commentpress('S')">S</button>
+								<button type="numpadButton11" ng-click="commentpress('D')">D</button> 
+								<button type="numpadButton11" ng-click="commentpress('F')">F</button>
+								<button type="numpadButton11" ng-click="commentpress('G')">G</button>
+								<button type="numpadButton11" ng-click="commentpress('H')">H</button> 
+								<button type="numpadButton11" ng-click="commentpress('J')">J</button>
+								<button type="numpadButton11" ng-click="commentpress('K')">K</button>
+								<button type="numpadButton11" ng-click="commentpress('L')">L</button>
+								<button type="numpadButton11" ng-click="commentpress('?')">?</button>
+							</div>
+							<div id="four">
+								<button type="numpadButton11" ng-click="commentpress('Z')">Z</button>
+								<button type="numpadButton11" ng-click="commentpress('X')">X</button>
+								<button type="numpadButton11" ng-click="commentpress('C')">C</button> 
+								<button type="numpadButton11" ng-click="commentpress('V')">V</button>
+								<button type="numpadButton11" ng-click="commentpress('B')">B</button>
+								<button type="numpadButton11" ng-click="commentpress('N')">N</button> 
+								<button type="numpadButton11" ng-click="commentpress('M')">M</button>
+								<button type="numpadButton11" ng-click="commentpress('.')">.</button>
+								<button type="numpadButton11" ng-click="commentpress(',')">,</button>
+								<button type="numpadButton11" ng-click="commentpress('/')">/</button>
+							</div>
+							<div id="five">
+								<button type="delButton11" ng-click="commentcncpress()"><-</button>
+								<button type="spaceButton11" ng-click="commentpress(' ')"></button>
+								<button type="enterButton11" data-dismiss="modal" ng-click="enterComment()">ENTER</button> 
+							</div>
+						</div>
+						<div id="second-two11" ng-hide="smallLettersFlag">
+							<div id="one">
+								<button type="numpadButton11" ng-click="commentpress(1)">1</button>
+								<button type="numpadButton11" ng-click="commentpress(2)">2</button>
+								<button type="numpadButton11" ng-click="commentpress(3)">3</button> 
+								<button type="numpadButton11" ng-click="commentpress(4)">4</button>
+								<button type="numpadButton11" ng-click="commentpress(5)">5</button>
+								<button type="numpadButton11" ng-click="commentpress(6)">6</button> 
+								<button type="numpadButton11" ng-click="commentpress(7)">7</button>
+								<button type="numpadButton11" ng-click="commentpress(8)">8</button>
+								<button type="numpadButton11" ng-click="commentpress(9)">9</button>
+								<button type="numpadButton11" ng-click="commentpress(0)">0</button>
+							</div>
+							<div id="two">
+								<button type="numpadButton11" ng-click="commentpress('q')">q</button>
+								<button type="numpadButton11" ng-click="commentpress('w')">w</button>
+								<button type="numpadButton11" ng-click="commentpress('e')">e</button> 
+								<button type="numpadButton11" ng-click="commentpress('r')">r</button>
+								<button type="numpadButton11" ng-click="commentpress('t')">t</button>
+								<button type="numpadButton11" ng-click="commentpress('y')">y</button> 
+								<button type="numpadButton11" ng-click="commentpress('u')">u</button>
+								<button type="numpadButton11" ng-click="commentpress('i')">i</button>
+								<button type="numpadButton11" ng-click="commentpress('o')">o</button>
+								<button type="numpadButton11" ng-click="commentpress('p')">p</button>
+							</div>
+							<div id="three">
+								<button type="numpadButton11" ng-click="commentpress('a')">a</button>
+								<button type="numpadButton11" ng-click="commentpress('s')">s</button>
+								<button type="numpadButton11" ng-click="commentpress('d')">d</button> 
+								<button type="numpadButton11" ng-click="commentpress('f')">f</button>
+								<button type="numpadButton11" ng-click="commentpress('g')">g</button>
+								<button type="numpadButton11" ng-click="commentpress('h')">h</button> 
+								<button type="numpadButton11" ng-click="commentpress('j')">j</button>
+								<button type="numpadButton11" ng-click="commentpress('k')">k</button>
+								<button type="numpadButton11" ng-click="commentpress('l')">l</button>
+								<button type="numpadButton11" ng-click="commentpress('?')">?</button>
+							</div>
+							<div id="four">
+								<button type="numpadButton11" ng-click="commentpress('z')">z</button>
+								<button type="numpadButton11" ng-click="commentpress('x')">x</button>
+								<button type="numpadButton11" ng-click="commentpress('c')">c</button> 
+								<button type="numpadButton11" ng-click="commentpress('v')">v</button>
+								<button type="numpadButton11" ng-click="commentpress('b')">b</button>
+								<button type="numpadButton11" ng-click="commentpress('n')">n</button> 
+								<button type="numpadButton11" ng-click="commentpress('m')">m</button>
+								<button type="numpadButton11" ng-click="commentpress('.')">.</button>
+								<button type="numpadButton11" ng-click="commentpress(',')">,</button>
+								<button type="numpadButton11" ng-click="commentpress('/')">/</button>
+							</div>
+							<div id="five">
+								<button type="delButton11" ng-click="commentcncpress()"><-</button>
+								<button type="spaceButton11" ng-click="commentpress(' ')"></button>
+								<button type="enterButton11" data-dismiss="modal" ng-click="enterComment()">ENTER</button> 
+							</div>
+						</div>
+					</div>
+					<div id="third11">
+						<button type="confirmOption" data-dismiss="modal" ng-click="enterComment()">OK</button>
+						<button type="confirmOption" data-dismiss="modal" ng-click="cancelPress()">Cancel</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+		<script src="js/app.js"></script>
+		<script src="js/transactionScreen.js"></script>
+		<script src="js/fullScreen.js"></script>
+	</div>
+	</body>
+</html>
