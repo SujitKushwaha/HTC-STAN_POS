@@ -10,7 +10,7 @@ html,body
 	width:100%;
 }
 
-#first11
+#modal-header
 {
 	height:10%;
 	background-color:black;
@@ -134,10 +134,10 @@ button[type="delButton11"]
 	background:linear-gradient(#B2CCCC,#3D5C5C);
 	float:left;
 }
-button[type="confirmOption"]
+button[type="confirmOption11"]
 {
-	height:99%;
-	width:15%;
+	height:10vh;
+	width:5vw;
 	color:white;
 	float:right;
 	margin-top:2px;

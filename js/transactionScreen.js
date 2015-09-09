@@ -24,6 +24,8 @@ ionicApp.controller('MainController', ['$scope', function($scope) {
 	var EC;
 	var check=0;
 	var checkOne=0;
+	var discount=0;
+	
 	$scope.btnpress= function(btnid) 
     {	
 		btnstring=$scope.btnstring;//Required if mixing both type of inputs at same time in same box
@@ -283,12 +285,39 @@ ionicApp.controller('MainController', ['$scope', function($scope) {
 					if(discountVal<100 && discountVal>0)
 					{
 						discount=((myCart[i].rate*discountVal)/100);
-						total-=discount;
-						myCart[i].discount=discount;
-						var item=new Object();
-						item.name=myCart[i].name;
-						item.discount=discount;
-						myDiscount.push(item);
+						if(myCart[i].discount==0)
+						{
+							var item=new Object();
+							item.name=myCart[i].name;
+							item.discount=discount;
+							myDiscount.push(item);
+							myCart[i].discount+=discount;
+						}
+						else
+						{
+							myCart[i].discount+=discount;
+							for(var j=0;j<myDiscount.length;j++)
+							{
+								if(myDiscount[j].name==myCart[i].name)
+								{
+									myDiscount[j].discount+=discount;
+									if((myCart[i].rate-myDiscount[j].discount)<0)
+									{
+										myDiscount[j].discount-=discount;
+									}
+									break;
+								}
+							}
+						}
+						if((myCart[i].rate-myCart[i].discount)>0)
+						{
+							total-=discount;
+						}
+						else
+						{
+							myCart[i].discount-=discount;
+							alert("Percentage will cause exccess discount-----");
+						}
 					}
 					else
 					alert("Enter Correct Percentage");
@@ -305,12 +334,39 @@ ionicApp.controller('MainController', ['$scope', function($scope) {
 					if(discountVal<myCart[i].rate && discountVal>0)
 					{
 						discount=discountVal;
-						total-=discountVal;
-						myCart[i].discount=discount;
-						var item=new Object();
-						item.name=myCart[i].name;
-						item.discount=discount;
-						myDiscount.push(item);
+						if(myCart[i].discount==0)
+						{
+							var item=new Object();
+							item.name=myCart[i].name;
+							item.discount=discount;
+							myDiscount.push(item);
+							myCart[i].discount+=discount;
+						}
+						else
+						{
+							myCart[i].discount+=discount;
+							for(var j=0;j<myDiscount.length;j++)
+							{
+								if(myDiscount[j].name==myCart[i].name)
+								{
+									myDiscount[j].discount+=discount;
+									if((myCart[i].rate-myDiscount[j].discount)<0)
+									{
+										myDiscount[j].discount-=discount;
+									}
+									break;
+								}
+							}
+						}
+						if((myCart[i].rate-myCart[i].discount)>0)
+						{
+							total-=discount;
+						}
+						else
+						{
+							myCart[i].discount-=discount;
+							alert("Amount will cause exccess discount-----");
+						}
 					}
 					else
 					alert("Enter Correct Discount");
@@ -445,6 +501,8 @@ ionicApp.controller('MainController', ['$scope', function($scope) {
 				myItem.name="Slurpee Small";
 				myItem.rate=5.20;
 				myItem.price=5.20;
+				myItem.discountFlag=false;
+				myItem.discount=0;
 			}
 			if(itemID==2)
 			{
@@ -453,6 +511,8 @@ ionicApp.controller('MainController', ['$scope', function($scope) {
 				myItem.name="Slurpee Medium";
 				myItem.rate=10.00;
 				myItem.price=10.00;
+				myItem.discountFlag=false;
+				myItem.discount=0;
 			}
 			if(itemID==3)
 			{
@@ -461,6 +521,8 @@ ionicApp.controller('MainController', ['$scope', function($scope) {
 				myItem.name="Slurpee Large";
 				myItem.rate=25.00;
 				myItem.price=25.00;
+				myItem.discountFlag=false;
+				myItem.discount=0;
 			}
 			if(itemID==4)
 			{
@@ -469,6 +531,9 @@ ionicApp.controller('MainController', ['$scope', function($scope) {
 				myItem.name="Coffee Small";
 				myItem.rate=7.20;
 				myItem.price=7.20;
+				myItem.discountFlag=false;
+				myItem.discount=0;
+				
 			}
 			if(itemID==5)
 			{
@@ -477,14 +542,18 @@ ionicApp.controller('MainController', ['$scope', function($scope) {
 				myItem.name="Coffee Medium";
 				myItem.rate=14.50;
 				myItem.price=14.50;
+				myItem.discountFlag=false;
+				myItem.discount=0;
 			}
 			if(itemID==6)
 			{
 				myItem.Id=6;
 				myItem.qty=1;
-				myItem.name="Coffee Large";e
+				myItem.name="Coffee Large";
 				myItem.rate=30.00;
 				myItem.price=30.00;
+				myItem.discountFlag=false;
+				myItem.discount=0;
 			}
 			myItem.itemFree=false;
 			myCart.push(myItem);

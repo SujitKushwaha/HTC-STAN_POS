@@ -175,7 +175,7 @@ button[type="optionButton"]
 	float:right;
 	color:white;
     border-radius: 10px;
-	background-color:#5C8A8A;
+	background:linear-gradient(#B2CCCC,#3D5C5C);
 }
 button[type="crossButton"]
 {
@@ -193,7 +193,7 @@ button[type="numpadButton"]
 	margin-left:2px;
 	color:white;
     border-radius: 10px;
-	background-color:#5C8A8A;
+	background:linear-gradient(#B2CCCC,#3D5C5C);
 }
 button[type="numpadButton1"]
 {
@@ -203,7 +203,7 @@ button[type="numpadButton1"]
 	margin-left:2px;
 	color:white;
     border-radius: 10px;
-	background-color:#5C8A8A;
+	background:linear-gradient(#B2CCCC,#3D5C5C);
 }
 button[type="enterButton"]
 {
@@ -213,7 +213,7 @@ button[type="enterButton"]
 	margin-left:2px;
 	color:white;
     border-radius: 10px;
-	background-color:#5C8A8A;
+	background:linear-gradient(#B2CCCC,#3D5C5C);
 }
 button[type="doubleZeroButton"]
 {
@@ -223,5 +223,5 @@ button[type="doubleZeroButton"]
 	margin-left:2px;
 	color:white;
     border-radius: 10px;
-	background-color:#5C8A8A;
+	background:linear-gradient(#B2CCCC,#3D5C5C);
 }

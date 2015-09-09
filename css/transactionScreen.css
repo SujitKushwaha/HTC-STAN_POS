@@ -63,6 +63,7 @@ html,body
 	border-style:groove;
 	border-width:0.15vw;
 	border-color:grey;
+	overflow-y:scroll;
 }
 #first-one-two
 {
@@ -205,15 +206,7 @@ html,body
 	border-color:grey;
 	float:left;
 }
-#keyboardScreen {
-width:100vw;
-height:100vh;
-}
-#keyboardScreenDialog
-{
-height:95vh;
-width:95vw;
-}
+
 #Row2
 {
 	width:100%;
@@ -382,6 +375,33 @@ width:95vw;
 	border-color: grey;
 	float:left;
 }
+ #myrowdouble
+{
+	width:100%;
+	border-style:groove;
+	border-width:2px;
+	height:10vh;
+    color:#542437;
+	border-top:white;
+	border-right:white;
+	border-left:white;
+	border-bottom:white;
+	position:relative;
+	text-align:center;
+	border-color: grey;
+	float:left;
+}
+ul
+{
+    list-style-type: none;
+}
+
+#discountShow
+{
+	float:left;
+	margin-left:5vw;
+}
+
 #myDiscountRow
 {
 	width:100%;
@@ -400,7 +420,6 @@ width:95vw;
 	width:100%;
 	
 }
-
 #mytotal
 {
 	width:100%;
@@ -417,11 +436,184 @@ width:95vw;
 	border-color: grey;
 }
 span[type="posHeader"]{
-
-
 font-size:1.5vw;
+}
+
+#keyboardScreenDialog
+{
+	margin-top:15vh;
+	width: 80vw;
+	height: 60vh;
+	background-color:transparent;
+}
+.modal
+{
+  position: fixed;
+	height:100vh;
+	width:100vw;
+	background-color:transparent;
+}
+.modal-body
+{
+	height:70vh;
+	width:80vw;
+	background-color:transparent;
+}
+
+#first11
+{
+	height:10%;
+	background-color:black;
+}
+#tb111
+{
+    font-size:100%;
+    background-color :white;
+	width: 100%;
+	height:500%;
+}
+#second11
+{
+	height:90%;
+	width:100%;
+	background-color:black;
+}
+#third11
+{
+	height:10%;
+	width:100%;
+	background-color:black;
+}
+#first-one11
+{
+	height:45%;
+	width:100%;
+}
+#first-two11
+{
+	height:55%;
+	width:100%;
+}
+#second-one11
+{
+	height:98%;
+	width:9.1%;
+	float:left;
+}
+#second-two11
+{
+	height:98%;
+	width:90.9%;
+	float:right;
+}
+#one11
+{
+	height:20%;
+	width:100%;
+}
+#two11
+{
+	height:20%;
+	width:100%;
+}
+#three11
+{
+	height:20%;
+	width:100%;
+}
+#four11
+{
+	height:20%;
+	width:100%;
+}
+#five11
+{
+	height:20%;
+	width:100%;
+}
+button[type="confirmOption11"]
+{
+	height:24.25%;
+	width:99%;
+	color:white;
+	margin-top:4px;
+    border-radius: 8px;
+	background:linear-gradient(#33CC33,#248F24);
+	float:left;
+}
+button[type="confirmOption12"]
+{
+	height:24.25%;
+	width:99%;
+	color:white;
+	margin-top:4px;
+    border-radius: 8px;
+	background:linear-gradient(#FF6666,red);
+	float:left;
+}
+button[type="Button11"]
+{
+	height:24.25%;
+	width:99%;
+	color:white;
+	margin-top:4px;
+    border-radius: 8px;
+	background:linear-gradient(#B2CCCC,#3D5C5C);
+	float:left;
+}
+button[type="numpadButton11"]
+{
+	height:99%;
+	width:10%;
+	color:white;
+	margin-top:2px;
+    border-radius: 8px;
+	background:linear-gradient(#B2CCCC,#3D5C5C);
+	float:left;
+}
+button[type="spaceButton11"]
+{
+    float:left;
+	height:99%;
+	width:60%;
+	color:white;
+	margin-top:2px;
+    border-radius: 8px;
+	background:linear-gradient(#B2CCCC,#3D5C5C);
+}
+button[type="enterButton11"]
+{
+	height:99%;
+	width:20%;
+	color:white;
+	margin-top:2px;
+    border-radius: 8px;
+	background:linear-gradient(#B2CCCC,#3D5C5C);
+	float:right;
+}
+
+button[type="delButton11"]
+{
+	height:99%;
+	width:20%;
+	color:white;
+	margin-top:2px;
+    border-radius: 8px;
+	background:linear-gradient(#B2CCCC,#3D5C5C);
+	float:left;
+}
 
 
+button[type="confirmOption"]
+{
+	height:20%;
+	width:20%;
+	color:white;
+	float:right;
+	margin-top:2px;
+	margin-right:2px;
+    border-radius: 8px;
+	background:linear-gradient(#B2CCCC,#3D5C5C);
 }
 button[type="optionButton"]
 {
